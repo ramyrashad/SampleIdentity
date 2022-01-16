@@ -1,0 +1,6 @@
+﻿Client_Id : SystemClient
+Client_Secret : s/0jBJZKtalWHFgDcS2gP0JCmd+1wRtvpdLNDZIuqo4=
+
+Adimn User
+UserName : admin
+Password : abc@1234
