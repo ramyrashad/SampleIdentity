@@ -54,5 +54,16 @@ namespace SampleIdentity.Core.Services.Account
 
             return null;
         }
+
+        public Task<ApplicationUser> GetLoggedInUser()
+        {
+            if (_httpContextAccessor.HttpContext.User == null)
+                throw new Exception("NoUserLoggedIn");
+
+            if (_httpContextAccessor.HttpContext.User.Identity == null)
+                throw new Exception("NoUserLoggedIn");
+
+            return _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+        }
     }
 }

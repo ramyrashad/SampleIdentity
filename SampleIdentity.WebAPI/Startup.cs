@@ -271,6 +271,7 @@ namespace SampleIdentity.WebAPI
             services.AddScoped<IClientService, ClientService>();
             services.AddScoped<IRefreshTokenService, RefreshTokenService>();
             services.AddScoped<IUserAccountService, UserAccountService>();
+            services.AddScoped<IRoleService, RoleService>(); 
 
 
             services.AddScoped<ITokenGeneratorProvider, TokenGeneratorProvider>();

@@ -12,5 +12,6 @@ namespace SampleIdentity.Core.Services.Account.Interfaces
     {
         Task<ApplicationUser> AuthorizeUser(AutheticationBindingModel autheticationBindingModel);
         Task<ApplicationUser> FindNormalUserByUserName(string userName);
+        Task<ApplicationUser> GetLoggedInUser();
     }
 }

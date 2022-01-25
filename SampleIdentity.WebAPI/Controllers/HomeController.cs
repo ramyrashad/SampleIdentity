@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SampleIdentity.Core.Services.Account.Misc;
+using SampleIdentity.WebAPI.Filters;
 using System.Net;
 
 namespace SampleIdentity.WebAPI.Controllers
@@ -25,6 +27,7 @@ namespace SampleIdentity.WebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [AuthenticationFilter(SystemRoles.SuperAdministrator)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Post()
         {
