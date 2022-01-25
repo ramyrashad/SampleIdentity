@@ -7,6 +7,7 @@ using SampleIdentity.Core.Entities.ApplicationUserAggregate;
 using SampleIdentity.Core.Repositories;
 using SampleIdentity.Core.Services.Account.Interfaces;
 using SampleIdentity.WebAPI.Providers.Interfaces;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -66,9 +67,14 @@ namespace SampleIdentity.WebAPI.Providers
                         new Claim(JwtRegisteredClaimNames.Email, user.Email),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                         new Claim(JwtRegisteredClaimNames.Iat, utcNow.ToString()),
-                        new Claim(nameof(user.EmailConfirmed), user.EmailConfirmed.ToString()),
-
+                        new Claim(nameof(user.EmailConfirmed), user.EmailConfirmed.ToString())
             };
+
+            var roles = await _userManager.GetRolesAsync(user);
+            foreach (var role in roles)
+            {
+                claims.Append(new Claim(ClaimsIdentity.DefaultRoleClaimType, role));
+            }
 
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.Tokens.SecretKey));
             var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
